@@ -34,7 +34,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home:  MultiInputScannerPage(),
+      // home: const LaserScannerPage(title: 'Flutter Demo Home Page'),
+      home: LaserScannerPage(),
+      // home:  MultiInputScannerPage(),
     );
   }
 }
