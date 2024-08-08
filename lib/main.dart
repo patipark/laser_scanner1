@@ -1,6 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:laser_scanner1/laser_scan_page.dart';
 import 'package:laser_scanner1/multiple_scan_page.dart';
+import 'package:laser_scanner1/my_barcode_listener.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,8 +38,9 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: const LaserScannerPage(title: 'Flutter Demo Home Page'),
-      home: LaserScannerPage(),
+      // home: LaserScannerPage(),
       // home:  MultiInputScannerPage(),
+      home: const MyBarcodeListener(title: "Barcode Listener Demo"),
     );
   }
 }
