@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laser_scanner1/laser_scan_page.dart';
+import 'package:laser_scanner1/multiple_scan_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: const LaserScannerPage(title: 'Flutter Laser Scanner Demo'),
+      home:  MultiInputScannerPage(),
     );
   }
 }

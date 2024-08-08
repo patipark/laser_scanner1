@@ -1,66 +1,53 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class LaserScannerPage extends StatefulWidget {
   final String title;
-
-  const LaserScannerPage({super.key , required this.title});
+  const LaserScannerPage({super.key, required this.title});
 
   // @override
   // _LaserScannerPageState createState() => _LaserScannerPageState();
-   @override
+  @override
   State<LaserScannerPage> createState() => _LaserScannerPageState();
 }
 
 class _LaserScannerPageState extends State<LaserScannerPage> {
-  final TextEditingController _controller = TextEditingController();
   String _scannedCode = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(_onTextChanged);
-  }
-
-  void _onTextChanged() {
-    if (_controller.text.isNotEmpty) {
-      setState(() {
-        _scannedCode = _controller.text;
-        debugPrint('Scanned code: $_scannedCode');
-      });
-      _controller.clear();
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  String _buffer = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Laser Scanner')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _controller,
-              autofocus: true,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Scan a barcode',
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text('Scanned Code: $_scannedCode', style: const TextStyle(fontSize: 20)),
-          ],
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: KeyboardListener(
+        focusNode: FocusNode(),
+        // onKey: _handleKeyEvent,
+        onKeyEvent: _handleKeyEvent,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Scanned Code: $_scannedCode!',
+                  style: const TextStyle(fontSize: 20)),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void _handleKeyEvent(KeyEvent event) {
+    if (event is KeyDownEvent) {
+      if (event.logicalKey == LogicalKeyboardKey.enter) {
+        setState(() {
+          _scannedCode = _buffer;
+          _buffer = '';
+        });
+      } else {
+        _buffer += event.character ?? '';
+      }
+    }
   }
 }
