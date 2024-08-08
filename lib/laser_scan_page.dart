@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class LaserScannerPage extends StatefulWidget {
   @override
   _LaserScannerPageState createState() => _LaserScannerPageState();
@@ -22,7 +21,8 @@ class _LaserScannerPageState extends State<LaserScannerPage> {
   void _onTextChanged() {
     if (_controller.text.isNotEmpty) {
       setState(() {
-        _scannedCode = _controller.text;
+        _scannedCode += _controller.text;
+        // _scannedCode += '${_controller.text}\n'; // ต่อ string ด้วย \n (return/enter)
         print(_scannedCode);
       });
       _controller.clear();
